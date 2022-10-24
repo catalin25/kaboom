@@ -8,13 +8,21 @@ kaboom();
 // load assets
 loadSprite("bean", "assets/idle1.gif");
 loadSprite("bg", "assets/bgpic.jpg")
-// loadSprite("soundbg", "assets/sounds.mp3")
+loadSprite("bgover", "assets/bgover.jfif")
+loadSound("bgmusic", "assets/bgmusic.mp3")
+
+const bgmusic = play("bgmusic", {
+    loop:true,
+})
+
+volume(0.7)
 
 scene("game", () => {
 
     // define gravity
     gravity(2400);
 
+    
     const bg = add([
         sprite("bg" ,{width: width(), height: height()}),
     ])
@@ -77,7 +85,6 @@ scene("game", () => {
         // go to "lose" scene and pass the score
         go("lose", score);
         addKaboom(player.pos);
-        addKaboom(bg,(0,0));
     });
 
     // keep track of score
@@ -98,14 +105,14 @@ scene("game", () => {
 
 scene("lose", (score) => {
 
-    const bg = add([
-        sprite("bg" ,{width: width(), height: height()}),
+    const bgover = add([
+        sprite("bgover" ,{width: width(), height: height()}),
     ])
 
     add([
         sprite("bean"),
         pos(width() / 2, height() / 2 - 80),
-        scale(2),
+        scale(3.5),
         origin("center"),
         
     ]);
