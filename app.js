@@ -2,7 +2,6 @@ const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 800;
 const SPEED = 480;
 
-// initialize context
 kaboom();
 
 // load assets
@@ -11,11 +10,27 @@ loadSprite("bg", "assets/bgpic.jpg")
 loadSprite("bgover", "assets/bgover.jfif")
 loadSound("bgmusic", "assets/bgmusic.mp3")
 
-const bgmusic = play("bgmusic", {
-    loop:true,
-})
+ 
+scene("pregame", () => {
+    const bg = add([
+        sprite("bg" ,{width: width(), height: height()}),
+    ])
+    
+    add([
+        sprite("bean"),
+        pos(width() / 2, height() / 2 - 80),
+        scale(3.5),
+        origin("center"),
+        
+    ]);
 
-volume(0.7)
+    onKeyPress("space", () => go("game"));
+    onClick(() => go("game"));
+    onClick(() => play("bgmusic"));
+    onTouchMove(() => go("game"));
+    onTouchMove(() => play("bgmusic"));
+
+})
 
 scene("game", () => {
 
@@ -52,11 +67,13 @@ scene("game", () => {
         if (player.isGrounded()) {
             player.jump(JUMP_FORCE);
         }
-    }
+    } 
 
+   
     // jump when user press space
     onKeyPress("space", jump);
-    onClick(jump);
+    onClick(jump, );
+
 
     function spawnTree() {
 
@@ -131,5 +148,6 @@ scene("lose", (score) => {
     onClick(() => go("game"));
 
 });
+go("pregame");
 
-go("game");
+// go("game");
