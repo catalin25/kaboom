@@ -27,8 +27,8 @@ scene("pregame", () => {
     onKeyPress("space", () => go("game"));
     onClick(() => go("game"));
     onClick(() => play("bgmusic"));
-    onTouchMove(() => go("game"));
-    onTouchMove(() => play("bgmusic"));
+    onTouchStart(() => go("game"));
+    onTouchStart(() => play("bgmusic"));
 
 })
 
